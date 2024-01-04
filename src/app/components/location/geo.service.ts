@@ -5,15 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class GeoService {
 
-  constructor() { }
-  public getUserLocation() {
+  public getUserLocation(): void {
        if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          console.log(position.coords)
+          console.log('>>>',position.coords)
           });
     }else {
        console.log("User not allow")
-
     }
   }
 }
