@@ -1,1 +1,19 @@
-<p>location works!</p>
+@if(geoService.list()?.length){
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Location</th>
+  </tr>
+  @for (point of testPoints; track point.latitude) {
+  <tr>
+    <td>{{ point.description }}</td>
+    <td>{{ geoService.getCity(point)?.city }}</td>
+  </tr>
+  }
+</table>
+}
+<!--<hr />-->
+<!--@for (item of list(); track item.id) {-->
+<!--{{ item.city }}-->
+<!--} @empty { no data }-->
+<!--<hr />-->

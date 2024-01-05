@@ -2,7 +2,7 @@ import fs from 'fs';
 import { ICity } from '@interfaces/location';
 // import * as XLSX from 'xlsx/xlsx.mjs';
 import { read, utils } from 'ts-xlsx';
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 
 const xlsBufer = fs.readFileSync('./scripts/data/worldcities.xlsx');
@@ -25,11 +25,12 @@ async function setCities(cities: any[]) {
       capital: cityRow.capital || null,
       population: cityRow.population || 0,
     } as ICity;
-    console.log(city)
+    console.log(city);
     // TODO: load local name from http://www.geonames.org/
   });
-  console.log('Added', cities.length)
+  console.log('Added', cities.length);
   const json = JSON.stringify(cities);
-  fs.writeFile('cities.json', json, 'utf8', console.log );
+  fs.writeFile('cities.json', json, 'utf8', console.log);
 }
 
+//https://www.geonames.org/countries/RU/Russia.html

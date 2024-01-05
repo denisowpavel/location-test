@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "extract-geodata": "node --loader ts-node/esm ./scripts/extract-geodata.ts",
-    "extract-geodata-dev": "nodemon --watch \"./scripts/**\" --ext \"ts,json\" --ignore \"scripts/**/*.spec.ts\" --exec \"ts-node --esm ./scripts/extract-geodata.ts\""
+    "extract-geodata-dev": "nodemon --watch \"./scripts/**\" --ext \"ts,json\" --ignore \"scripts/**/*.spec.ts\" --exec \"node --loader ts-node/esm ./scripts/extract-geodata.ts\"",
+    "computed-geodata": "node --loader ts-node/esm ./scripts/computed-geodata.ts",
+    "computed-geodata-dev": "nodemon --watch \"./scripts/**\" --ext \"ts,json\" --ignore \"scripts/**/*.spec.ts\" --exec \"node --loader ts-node/esm ./scripts/computed-geodata.ts\""
   },
   "type": "module",
   "private": true,

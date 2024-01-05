@@ -1,6 +1,13 @@
+export interface IGeolocationCoordinates {
+  accuracy?: number;
+  latitude: number;
+  longitude: number;
+  description?: string;
+}
+
 export interface IGeoPoint {
-  _lat: number;
-  _long: number;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ILocation {
@@ -13,14 +20,19 @@ export interface ILocation {
 }
 
 export interface ICity {
+  city: string;
   name: string;
   name_en: string;
   location: IGeoPoint;
   country: string;
   iso2: string;
-  iso3:  string;
+  iso3: string;
   admin_name: string;
   capital: string;
   population: number;
   id: string;
+
+  lat: string,
+  lng: string,
+
 }
