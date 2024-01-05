@@ -26,7 +26,7 @@ export class GeoService {
   }
 
   public getCity(point: IGeolocationCoordinates): ICity | undefined {
-    console.log(point);
+    //console.log(point);
     if (this.list()?.length) {
       return this.list()?.find((element) => {
         return this.onArea(element, point);
