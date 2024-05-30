@@ -1,51 +1,55 @@
-interface Site {
+import { Cell } from './cell';
+
+export interface ISite {
   x: number;
   y: number;
   voronoiId?: number;
 }
 
-interface Bbox {}
-
-interface Circle {
-  arc: any;
-}
-
-interface Cell {}
-
-interface Vertex {
+export interface IVertex {
   x: number;
   y: number;
 }
 
-
-interface Edge {
-  va: Vertex  |Site;
-  vb: Vertex | Site;
-  lSite?: Site;
-  rSite?: Site;
+export interface IEdge {
+  va: IVertex | ISite;
+  vb: IVertex | ISite;
+  lSite?: ISite;
+  rSite?: ISite;
 }
 
-
-interface Diagram {
+export interface IDiagram {
   cells: Cell[];
-  edges: Edge[];
-  vertices: Vertex[];
+  edges: IEdge[];
+  vertices: IVertex[];
   execTime: number;
 }
 
-interface Vertex {
-  x: number;
-  y: number;
-}
-
-
-
-interface Halfedge {
-  site: Site;
-  edge: Edge;
+export interface IHalfedge {
+  site: ISite;
+  edge: IEdge;
   angle: number;
-  neighbor?: Site;
-  
+  neighbor?: ISite;
+
   getStartpoint: any;
   getEndpoint: any;
+}
+
+export interface ICircleEvent {
+  arc: any;
+  rbLeft: any;
+  rbNext: any;
+  rbParent: any;
+  rbPrevious: any;
+  rbRed: boolean;
+  rbRight: any;
+  site: any;
+  x: number;
+  y: number;
+  ycenter: number;
+}
+export interface IBbox {}
+
+export interface ICircle {
+  arc: any;
 }

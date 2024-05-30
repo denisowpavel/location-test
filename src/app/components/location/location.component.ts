@@ -9,11 +9,15 @@ import {
 import { GeoService } from './geo.service';
 import { IGeolocationCoordinates } from '@interfaces/location';
 import { MocTestPoints } from '@components/location/moc-test-points';
-
+import {CommonModule} from "@angular/common";
+// @ts-ignore
+// import * as voronoiCore from './math/rhillVoronoiCore';
+// import * as quadTree from './math/QuadTree';
+// let a = require('rhillVoronoiCore')
 @Component({
   selector: 'app-location',
   standalone: true,
-  imports: [],
+  imports: [CommonModule ],
   templateUrl: './location.component.html',
   styleUrl: './location.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,11 +28,13 @@ export class LocationComponent implements AfterViewInit {
 
   @ViewChild('diagramCanvas') canvas: ElementRef<HTMLCanvasElement>;
   private ctx?: CanvasRenderingContext2D;
-  private metrics = 3; //1-Евклидова, 2-Манхэттенская, 3-Минковского
-  private numPoints = 0;
-  private X = new Array();
-  private Y = new Array();
-  private C = new Array();
+  private metrics = 1; //1-Евклидова, 2-Манхэттенская, 3-Минковского
+  public numPoints = 0;
+  public X = new Array();
+  public Y = new Array();
+  public C = new Array();
+
+
 
   ngAfterViewInit() {
     // this.geoService.getUserLocation();
@@ -36,9 +42,10 @@ export class LocationComponent implements AfterViewInit {
       '2d'
     ) as CanvasRenderingContext2D;
 
-    // setTimeout(()=>{
-    console.log('>', this.ctx);
-    // },1000)
+      // let voronoi = new Voronoi();
+
+
+   //console.log('>',voronoiCore);
   }
 
   private randomNumber(max: number): number {
@@ -92,8 +99,9 @@ export class LocationComponent implements AfterViewInit {
         dist0 = this.Metric(height1, 1);
         j = -1;
         for (var i = 0; i < this.numPoints; i++) {
-          let dist1 = this.Metric(this.X[i] - x, this.Y[i] - y);
+          dist1 = this.Metric(this.X[i] - x, this.Y[i] - y);
           if (dist1 < dist0) {
+            //console.log(dist0, dist1)
             dist0 = dist1;
             j = i;
           }
@@ -114,25 +122,20 @@ export class LocationComponent implements AfterViewInit {
     }
     const x = e.clientX - this.canvas.nativeElement.offsetLeft;
     const y = e.clientY - this.canvas.nativeElement.offsetTop;
-    for (var i = 0; i < this.X.length; i++) {
-      if (
-        Math.sqrt(Math.pow(this.X[i] - x, 2) + Math.pow(this.Y[i] - y, 2)) < 5
-      ) {
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(this.X[i] - 2, this.Y[i] - 2, 7, 7);
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillRect(this.X[i], this.Y[i], 3, 3);
-        return; //Подчеркнём, что "слишком близко" и не добавляем
-      }
-    }
+
     this.X[this.numPoints] = x;
     this.Y[this.numPoints] = y;
     this.C[this.numPoints] = this.randomColor();
     this.numPoints++;
+
     this.Diagram();
   }
 }
 
 
-//http://www.raymondhill.net/voronoi/rhill-voronoi-demo5.html
+// http://www.raymondhill.net/voronoi/rhill-voronoi-demo5.html
 // https://habr.com/ru/articles/309252/
+// https://alexbeutel.com/webgl/voronoi.html
+// https://www.youtube.com/watch?v=L_joQb12QSE
+// https://www.youtube.com/watch?v=-XCVn73p3xs
+// https://www.youtube.com/watch?v=0AIQJ0qCspo

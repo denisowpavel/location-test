@@ -12,6 +12,7 @@ export class GeoService {
   list = toSignal<ICity[]>(this.loadRegionData('RU'));
 
   public loadRegionData(regionKey: string): Observable<ICity[]> {
+    // todo USE protobuf
     return this.http.get<ICity[]>(`assets/${regionKey}-test.json`);
   }
 
@@ -50,3 +51,12 @@ export class GeoService {
     );
   }
 }
+// https://www.youtube.com/watch?v=jxOAU7YfypA
+// https://www.youtube.com/watch?v=0rvjI_EBvXs
+// https://www.youtube.com/watch?v=PkdtAZdgI6k
+//https://github.com/mapbox/delaunator
+//https://www.youtube.com/watch?v=oQXWiL0bbhc
+//https://www.youtube.com/watch?v=pUwEp1hs8MM
+//www.kobzarev.com/programming/calculation-of-distances-between-cities-on-their-coordinates/
+//https://www.youtube.com/watch?v=GctAunEuHt4
+//https://www.youtube.com/watch?v=KcyGmhWcmqc

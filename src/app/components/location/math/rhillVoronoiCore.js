@@ -136,6 +136,7 @@ Voronoi.prototype.RBTree = function() {
     };
 
 Voronoi.prototype.RBTree.prototype.rbInsertSuccessor = function(node, successor) {
+  console.log('node>',node)
     var parent;
     if (node) {
         // >>> rhill 2011-05-27: Performance: cache previous/next nodes
